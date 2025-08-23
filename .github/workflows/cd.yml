@@ -1,0 +1,36 @@
+name: CD Pipeline
+
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    env:
+      PORT: 3000
+      NODE_ENV: production
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Download artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: simple-app-artifact
+        path: ./artifact
+
+    - name: Unzip artifact
+      run: unzip ./artifact/simple-app.zip -d ./artifact
+
+    - name: Install dependencies
+      run: npm install
+      working-directory: ./artifact
+
+    - name: Start application
+      run: npm start
+      working-directory: ./artifact
