@@ -30,7 +30,7 @@ jobs:
         path: ./artifact
 
     - name: Unzip artifact
-      run: unzip ./artifact/simple1-app.zip -d ./artifact
+      run: unzip ./artifact/simple-app1.zip -d ./artifact
 
     - name: Install dependencies
       run: npm install
