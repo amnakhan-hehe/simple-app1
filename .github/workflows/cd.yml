@@ -14,10 +14,6 @@ jobs:
       PORT: 3000
       NODE_ENV: production
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.GH1 }}   # Fine-grained PAT with Actions:Read + Contents:Read
       - name: Get latest CI run ID
         id: run
         run: |
@@ -28,6 +24,7 @@ jobs:
         with:
           name: simple-app1-artifact
           path: ./artifact
+          token: ${{ secrets.GH1 }}
           run-id: ${{ steps.run.outputs.run_id }}
       - name: Unzip artifact
         run: unzip ./artifact/simple-app1.zip -d ./artifact
