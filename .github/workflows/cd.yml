@@ -17,7 +17,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GH_PAT }}   # Fine-grained PAT with Actions:Read + Contents:Read
+          token: ${{ secrets.GH1_PAT }}   # Fine-grained PAT with Actions:Read + Contents:Read
       - name: Download artifact
         uses: actions/download-artifact@v5
         with:
