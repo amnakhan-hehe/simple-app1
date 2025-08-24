@@ -24,7 +24,7 @@ jobs:
         with:
           name: simple-app1-artifact
           path: ./artifact
-          token: ${{ secrets.GH1 }}
+          github-token: ${{ secrets.GH1 }}
           run-id: ${{ steps.run.outputs.run_id }}
       - name: Unzip artifact
         run: unzip ./artifact/simple-app1.zip -d ./artifact
