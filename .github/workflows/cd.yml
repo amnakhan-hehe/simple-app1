@@ -1,0 +1,34 @@
+name: CD Pipeline
+on:
+  workflow_run:
+    workflows: ["CI Pipeline"]
+    types:
+      - completed
+permissions:
+  actions: read
+  contents: read
+jobs:
+  deploy:
+    runs-on: self-hosted
+    env:
+      PORT: 3000
+      NODE_ENV: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GH_PAT }}   # Fine-grained PAT with Actions:Read + Contents:Read
+      - name: Download artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: simple-app1-artifact
+          path: ./artifact
+          run-id: ${{ steps.run.outputs.run_id }}
+      - name: Unzip artifact
+        run: unzip ./artifact/simple-app1.zip -d ./artifact
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./artifact
+      - name: Start application
+        run: npm start
+        working-directory: ./artifact
