@@ -13,11 +13,9 @@ permissions:
 jobs:
   deploy:
     runs-on: self-hosted
-
     env:
       PORT: 3000
       NODE_ENV: production
-      
 
     steps:
     - name: Checkout code
