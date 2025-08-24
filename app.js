@@ -37,8 +37,8 @@ app.post('/users', (req, res) => {
   res.status(201).json(newUser);
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+//app.listen(PORT, () => {
+  //console.log(`Server running on port ${PORT}`);
+//});
 
 module.exports = app;
