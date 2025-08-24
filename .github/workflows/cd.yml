@@ -17,11 +17,13 @@ jobs:
     env:
       PORT: 3000
       NODE_ENV: production
-
+      
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GH_PAT }}
 
     - name: Download artifact
       uses: actions/download-artifact@v4
@@ -30,7 +32,7 @@ jobs:
         path: ./artifact
 
     - name: Unzip artifact
-      run: unzip ./artifact/simple-app1-artifact.zip -d ./artifact
+      run: unzip ./artifact/simple-app1.zip -d ./artifact
 
     - name: Install dependencies
       run: npm install
